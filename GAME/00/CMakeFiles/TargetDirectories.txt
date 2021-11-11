@@ -1,0 +1,3 @@
+D:/IPS Bezgina/GAME/00/CMakeFiles/00.dir
+D:/IPS Bezgina/GAME/00/CMakeFiles/edit_cache.dir
+D:/IPS Bezgina/GAME/00/CMakeFiles/rebuild_cache.dir
