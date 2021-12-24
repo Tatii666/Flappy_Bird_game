@@ -1,0 +1,3 @@
+D:/IPS/2 year/OPD/Game/cmake-build-debug/CMakeFiles/Game.dir
+D:/IPS/2 year/OPD/Game/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/IPS/2 year/OPD/Game/cmake-build-debug/CMakeFiles/rebuild_cache.dir
