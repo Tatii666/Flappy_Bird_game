@@ -1,5 +1,0 @@
-D:\CLion\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - MinGW Makefiles" "D:\IPS\2 year\OPD\Game"
--- Found SFML 2.5.1 in C:/SFML/lib/cmake/SFML
--- Configuring done
--- Generating done
--- Build files have been written to: D:/IPS/2 year/OPD/Game/cmake-build-debug
