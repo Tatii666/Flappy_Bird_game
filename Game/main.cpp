@@ -13,13 +13,16 @@ int level = 1;
 int limLvl1 = 10;
 int limLvl2 = 20;
 int limLvl3 = 30;
-int limLvl4 = 400;
+int limLvl4 = 100;
+float enterSize2lvl = 100;
+float enterSize3lvl = 300;
+float enterSize4lvl = 200;
 int pipeMovementSpeed = 250;
 
 double vy_heroSprite = 0;
 double fallingAcceleration = 500; //ускорение свободного падения
-sf::Vector2f targetSize(70.0f, 60.0f); //целевой размер
-sf::Vector2f targetSizePipe(100.0f, 500.0f); //целевой размер
+sf::Vector2f targetSize(70.0f, 60.0f); //целевой размер птички
+sf::Vector2f targetSizePipe(100.0f, 500.0f); //целевой размер столба
 
 int Rand(int min, int max)
 {
@@ -54,11 +57,11 @@ void initPipePositions(std::vector<sf::Sprite*> pipesArray)
         if(i % 2 == 0)
         {
             float randomY = Rand(WINDOW_HEIGHT - 400, WINDOW_HEIGHT - 150);
-            pipesArray[i]->setPosition(800 + 200 * (i / 2), randomY);
+            pipesArray[i]->setPosition(WINDOW_WIDTH + 200 * (i / 2), randomY);
         }
         else
         {
-            pipesArray[i]->setPosition(800 + 200 * (i / 2), -1000);
+            pipesArray[i]->setPosition(WINDOW_WIDTH + 200 * (i / 2), -1000);
         }
     }
 }
@@ -147,7 +150,7 @@ bool pipeCollision(sf::Sprite &heroSprite, sf::Sprite &pipeSprite)
     sf::Vector2f positionPipe = pipeSprite.getPosition();
     sf::Vector2f positionHero = heroSprite.getPosition();
     if ((positionHero.x + (targetSize.x / 2) >= positionPipe.x) && //правая грань птички и левая трубы
-       (positionHero.y + (targetSize.y / 2) >= positionPipe.y) && //нижняя грань птички и верхняя трубы
+        (positionHero.y + (targetSize.y / 2) >= positionPipe.y) && //нижняя грань птички и верхняя трубы
         (positionHero.x - (targetSize.x / 2) <= positionPipe.x + targetSizePipe.x) && //левая грань прички и правая трубы
         (positionHero.y - (targetSize.y / 2) <= positionPipe.y + targetSizePipe.y)) //верхняя грань птички и нижняя трубы
     {
@@ -208,7 +211,7 @@ void textScore(sf::RenderWindow &window)
     sf::Font font;
     font.loadFromFile("PermanentMarker-Regular.ttf");
     sf::Text scoreText("Score: "+ std::to_string(score), font);
-    scoreText.setPosition(WINDOW_WIDTH/2 - scoreText.getLocalBounds().width/2, 5);
+    scoreText.setPosition(WINDOW_WIDTH / 2 - scoreText.getLocalBounds().width / 2, 5);
     scoreText.setFont(font);
     scoreText.setCharacterSize(32);
     scoreText.setFillColor(sf::Color(0x0, 0x0, 0x0));
@@ -290,48 +293,48 @@ void updatePipe(std::vector <sf::Sprite*> pipesArray, sf::Sprite &heroSprite, do
                 case 1:
                     if(i % 2 == 0)
                     {
-                        pipesArray[i]->setPosition(800, randomY);
+                        pipesArray[i]->setPosition(WINDOW_WIDTH, randomY);
                     }
                     else
                     {
-                        pipesArray[i]->setPosition(800, -1000);
+                        pipesArray[i]->setPosition(WINDOW_WIDTH, -1000);
                     }
 
                     break;
                 case 2:
                     if(i % 2 == 0)
                     {
-                        pipesArray[i]->setPosition(800, 1000);
+                        pipesArray[i]->setPosition(WINDOW_WIDTH, 1000);
                     }
                     else
                     {
-                        pipesArray[i]->setPosition(800, randomY - 100 - targetSizePipe.y);
+                        pipesArray[i]->setPosition(WINDOW_WIDTH, randomY - enterSize2lvl - targetSizePipe.y);
                     }
                     break;
                 case 3:
                     if(i % 2 == 0)
                     {
-                        pipesArray[i]->setPosition(800, randomY);
-                        pipesArray[i+1]->setPosition(800, randomY - 300 - targetSizePipe.y);
+                        pipesArray[i]->setPosition(WINDOW_WIDTH, randomY);
+                        pipesArray[i+1]->setPosition(WINDOW_WIDTH, randomY - enterSize3lvl - targetSizePipe.y);
                         i++;
                     }
                     else
                     {
-                        pipesArray[i]->setPosition(800, randomY - 300 - targetSizePipe.y);
-                        pipesArray[i-1]->setPosition(800, randomY);
+                        pipesArray[i]->setPosition(WINDOW_WIDTH, randomY - enterSize3lvl - targetSizePipe.y);
+                        pipesArray[i-1]->setPosition(WINDOW_WIDTH, randomY);
                     }
                     break;
                 case 4:
                     if(i % 2 == 0)
                     {
-                        pipesArray[i]->setPosition(800, randomY);
-                        pipesArray[i+1]->setPosition(800, randomY - 200 - targetSizePipe.y);
+                        pipesArray[i]->setPosition(WINDOW_WIDTH, randomY);
+                        pipesArray[i+1]->setPosition(WINDOW_WIDTH, randomY - enterSize4lvl - targetSizePipe.y);
                         i++;
                     }
                     else
                     {
-                        pipesArray[i]->setPosition(800, randomY - 200 - targetSizePipe.y);
-                        pipesArray[i-1]->setPosition(800, randomY);
+                        pipesArray[i]->setPosition(WINDOW_WIDTH, randomY - enterSize4lvl - targetSizePipe.y);
+                        pipesArray[i-1]->setPosition(WINDOW_WIDTH, randomY);
                     }
                     break;
                 case 5:
@@ -339,11 +342,11 @@ void updatePipe(std::vector <sf::Sprite*> pipesArray, sf::Sprite &heroSprite, do
                 default:
                     if(i % 2 == 0)
                     {
-                        pipesArray[i]->setPosition(800, randomY);
+                        pipesArray[i]->setPosition(WINDOW_WIDTH, randomY);
                     }
                     else
                     {
-                        pipesArray[i]->setPosition(800, -1000);
+                        pipesArray[i]->setPosition(WINDOW_WIDTH, -1000);
                     }
             }
         }
@@ -371,19 +374,23 @@ void pollEvents(sf::RenderWindow &window, sf::Sprite &heroSprite, sf::Sound &win
         }
     }
 }
+
 // Рисует и выводит один кадр
 void redrawFrame(sf::RenderWindow &window, sf::Sprite &heroSprite, sf::Sprite &s_forest, std::vector<sf::Sprite*> &pipesArray)
 {
     window.clear();
     window.draw(s_forest);
     window.draw(heroSprite);
-    textScore(window);
-    currentLevel(window);
+
     for(int i = 0; i < pipesArray.size(); i++)
     {
         sf::Sprite pipeSprite = *pipesArray[i];
         window.draw(pipeSprite);
     }
+
+    textScore(window);
+    currentLevel(window);
+
     if (isCollision)
     {
         gameOverScreen(window);
@@ -392,6 +399,7 @@ void redrawFrame(sf::RenderWindow &window, sf::Sprite &heroSprite, sf::Sprite &s
     {
         winGameScreen(window);
     }
+
     window.display();
 }
 
